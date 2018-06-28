@@ -1,5 +1,5 @@
 # to-do-app
-this application works as an agenda in such way that you can tasks
+this application works as a small agenda
 ___
 # requirement
 - python3
