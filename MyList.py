@@ -7,7 +7,7 @@ from datetime import date, datetime
 
 class MyList:
     Agenda = shelve.open('database.dat', writeback=True)  # create a storage that are working as dictionary
-    Date = re.compile("(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/([0-9]){4}")  # make a format for a date DD/MM/YY
+    Date = re.compile("(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/([0-9]){4}")  # make a format for a date DD/MM/YYYY
     Time = re.compile("^([01]?[0-9]|1[012]):([0-5]?[0-9]) (AM|PM)")  # make a format for the time HH:MM AM
 
     def __init__(self, name):  # create a constructor that will take the name of the person who want to add a list
@@ -61,19 +61,19 @@ class MyList:
         return status
 
     def setDate(self, task_date):  # set the date
-        if re.search(self.Date, task_date) is not None:  # check if the date respect the format(DD/MM/YY)
+        if re.search(self.Date, task_date) is not None:  # check if the date respect the format(DD/MM/YYYY)
             choice = input('Do you want to (Save or Cancel): ')
             if choice.title() == 'Save':
                 print('Your date has been saved\n')
                 self.task_date = task_date
             elif choice.title() == 'Cancel':
-                task_date = input("Enter the date that you will execute your task (Eg: DD/MM/YY): ")
+                task_date = input("Enter the date that you will execute your task (Eg: DD/MM/YYYY): ")
                 self.setDate(task_date)
             else:
                 self.setDate(task_date)
         else:
             print('\nPlease Try Again!! example: 31/12/2018')
-            task_date = input("Enter the date that you will execute your task (Eg: DD/MM/YY): ")
+            task_date = input("Enter the date that you will execute your task (Eg: DD/MM/YYYY): ")
             self.setDate(task_date)
 
     def getDate(self):  # get the date
@@ -135,41 +135,55 @@ class MyList:
         self.Agenda[str(position)] = details  # store the dictionary to our storage Agenda
 
     def update(self, option, number):
-        try:
-            for key, value in self.Agenda.items():
-                if self.name == value['Name'] and number == value['Position']:  # check if the name exist in the Agenda
-                    if option == 1:  # case for the task
-                        task = str(input("Enter the mew task to replace the old one: "))
-                        value['Task'] = task
-                        break
+        if self.Agenda:
+            option = str(input('From the list above enter the Number of the corresponding row that you want to modify: '))
+            print('What do you want to update: ')
+            print('1.Task')
+            print('2.Status')
+            print('3.Date')
+            print('4.Time')
+            print('5.Exit')
+            number = int(input('select by typing(1, 2, 3, 4 or 5)?: '))
+            try:
+                for key, value in self.Agenda.items():
+                    if self.name == value['Name'] and number == value['Position']:
+                        if option == 1:  # case for the task
+                            task = str(input("Enter the mew task to replace the old one: "))
+                            value['Task'] = task
+                            break
 
-                    elif option == 2:  # case for the status
-                        status = str(input('Enter the status of your task (Done or Not done): '))
-                        self.setStatus(status)
-                        self.getStatus()
-                        value['Status'] = status
-                        break
+                        elif option == 2:  # case for the status
+                            status = str(input('Enter the status of your task (Done or Not done): '))
+                            self.setStatus(status)
+                            self.getStatus()
+                            value['Status'] = status
+                            break
 
-                    elif option == 3:  # case for the date
-                        task_date = input("Enter the date that you will execute your task (Eg: DD/MM/YY): ")
-                        self.setDate(task_date)
-                        task_date = self.getDate()
-                        Dday = self.getDday()
-                        value['Date'] = task_date
-                        value['D-Day'] = Dday
-                        break
+                        elif option == 3:  # case for the date
+                            task_date = input("Enter the date that you will execute your task (Eg: DD/MM/YYYY): ")
+                            self.setDate(task_date)
+                            task_date = self.getDate()
+                            Dday = self.getDday()
+                            value['Date'] = task_date
+                            value['D-Day'] = Dday
+                            break
 
-                    elif option == 4:  # case for the time
-                        time_task = input("Enter the time that you will execute your task (Eg: HH:MM PM): ")
-                        self.setTime(time_task)
-                        time_task = self.getTime()
-                        value['Time'] = time_task
-                        break
-                    else:
-                        return
+                        elif option == 4:  # case for the time
+                            time_task = input("Enter the time that you will execute your task (Eg: HH:MM PM): ")
+                            self.setTime(time_task)
+                            time_task = self.getTime()
+                            value['Time'] = time_task
+                            break
+                        else:
+                            return
+            except:
+                print('Please verified the corresponding number of row that you have entered if it beyond to your '
+                      'list!!')
 
-        except:
-            pass
+        else:
+            print('\n***You cannot update your list****')
+            print('Your list is empty\n')
+
 
     def delete(self):
         if self.Agenda:
