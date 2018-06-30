@@ -6,7 +6,7 @@ ___
 - to run the app in the terminal(*python3 main.py*)
 ___
 # database configuration
-- shelve.open('c\\database.dat', writeback=True): *storage that are working as dictionary*
+- shelve.open('database.dat', writeback=True): *storage that are working as dictionary*
 
 # what works:
 - users identification by its name
