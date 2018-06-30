@@ -2,7 +2,13 @@ from MyList import *  # import all in Mylist
 import sys
 
 name = input("Your name: ")
-do = MyList(name)  # create an instance of class Mylist
+if name.isidentifier():  #
+    do = MyList(name)  # create an instance of class Mylist
+else:
+    print('your name cannot be saved!')
+    print('Enter one word that will correspond to your name. Egg:ulrich')
+    print('AND TRY AGAIN!!)
+    sys.exit()
 while True:
     print('1.Add a task with its details')
     print('2.Show your list')
@@ -12,7 +18,7 @@ while True:
     option = str(input("Type your choice: "))
     if option == '1':
         task = str(input('Enter your task: '))
-        if task:  # check if your task can be identified so is not empty
+        if task:  # check if your task is not empty
             task = do.setTask(task)
             status = str(input('Enter the status of your task (Done or Not done): '))
             do.setStatus(status)
@@ -31,14 +37,7 @@ while True:
 
     elif option == '3':
         do.display()
-        select = str(input('From the list above enter the Number of the corresponding row that you want to modify: '))
-        print('What do you want to update: ')
-        print('1.Task')
-        print('2.Status')
-        print('3.Date')
-        print('4.Time')
-        choice = int(input('select by typing(1, 2, 3 or 4)?: '))
-        do.update(choice, select)
+        do.update()
 
     elif option == '4':
         do.display()
