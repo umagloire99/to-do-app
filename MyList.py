@@ -6,7 +6,7 @@ from datetime import date, datetime
 
 
 class MyList:
-    Agenda = shelve.open('c\\database2.dat', writeback=True)  # create a storage that are working as dictionary
+    Agenda = shelve.open('database.dat', writeback=True)  # create a storage that are working as dictionary
     Date = re.compile("(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/([0-9]){4}")  # make a format for a date DD/MM/YY
     Time = re.compile("^([01]?[0-9]|1[012]):([0-5]?[0-9]) (AM|PM)")  # make a format for the time HH:MM AM
 
