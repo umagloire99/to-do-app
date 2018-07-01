@@ -143,22 +143,22 @@ class MyList:
             print('2.Status')
             print('3.Date')
             print('4.Time')
-            option = int(input('select by typing(1, 2, 3 or 4)?: '))
+            option = str(input('select by typing(1, 2, 3 or 4)?: '))
             for key, value in self.Agenda.items():
                 if self.name == value['Name'] and number == value['Position']:  # check if the name exist in the Agenda
-                    if option == 1:  # case for the task
+                    if option == '1':  # case for the task
                         task = str(input("Enter the mew task to replace the old one: "))
                         value['Task'] = task
                         break
 
-                    elif option == 2:  # case for the status
+                    elif option == '2':  # case for the status
                         status = str(input('Enter the status of your task (Done or Not done): '))
                         self.setStatus(status)
                         self.getStatus()
                         value['Status'] = status
                         break
 
-                    elif option == 3:  # case for the date
+                    elif option == '3':  # case for the date
                         task_date = input("Enter the date that you will execute your task (Eg: DD/MM/YY): ")
                         self.setDate(task_date)
                         task_date = self.getDate()
@@ -167,7 +167,7 @@ class MyList:
                         value['D-Day'] = Dday
                         break
 
-                    elif option == 4:  # case for the time
+                    elif option == '4':  # case for the time
                         time_task = input("Enter the time that you will execute your task (Eg: HH:MM PM): ")
                         self.setTime(time_task)
                         time_task = self.getTime()
@@ -191,16 +191,16 @@ class MyList:
             for key, value in self.Agenda.items():
                 if self.name == value['Name'] and number == value['Position']:  # according to the position and the name
                     del self.Agenda[key]  # before delete a task
-                    print('Your has been successful deleted!\n')
+                    print('****Your task has been successful deleted!****\n')
                     break
 
         else:
-            print('Your list is empty\n')
+            print('****Your list is empty*****\n')
 
     def display(self):  # show my list
         fmt = '{{:{}}}{{:>{}}}{{:>{}}}{{:>{}}}{{:>{}}}{{:>{}}}'.format(10, 30, 15, 15, 15, 10)
         print('=' * 95)
-        print(fmt.format('Number', 'Tasks'.ljust(30), 'Status'.center(9), 'Date'.center(15), 'Time'.center(15),
+        print(fmt.format('Number', 'Tasks'.ljust(30), 'Status'.center(8), 'Date'.center(15), 'Time'.center(15),
                          'D-Day'.ljust(0)))
         print('-' * 95)
         try:
