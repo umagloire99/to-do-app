@@ -134,7 +134,7 @@ class MyList:
         details['D-Day'] = Dday
         self.Agenda[str(position)] = details  # store the dictionary to our storage Agenda
 
-    def update(self, option, number):
+    def update(self):
         if self.Agenda:
             number = str(input('From the list above enter the Number of the corresponding Tasks that you want to '
                                'modify: ')) 
