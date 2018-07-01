@@ -7,7 +7,7 @@ if name.isidentifier():  #
 else:
     print('your name cannot be saved!')
     print('Enter one word that will correspond to your name. Egg:ulrich')
-    print('AND TRY AGAIN!!)
+    print('AND TRY AGAIN!!')
     sys.exit()
 while True:
     print('1.Add a task with its details')
